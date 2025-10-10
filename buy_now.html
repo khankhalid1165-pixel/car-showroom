@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Buy Now{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: auto; padding: 20px;">
+    <h2 style="color: #0077b6;">Buy {{ car.name }}</h2>
+    
+    {% if error %}
+        <div style="color: red; background: #ffe6e6; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <form method="post">
+            {% csrf_token %}
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Name:</label>
+                <input type="text" name="name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Phone:</label>
+                <input type="text" name="phone" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Email:</label>
+                <input type="email" name="email" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+            </div>
+            
+            <button type="submit" class="btn btn-success" style="width: 100%;">Complete Purchase</button>
+        </form>
+        
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="{% url 'car_detail' car.id %}" class="btn">Back to Car Details</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

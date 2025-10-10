@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: auto; padding: 20px;">
+    <h1 style="text-align:center; color:#0077b6; margin-bottom:30px;">Inventory</h1>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+        {% for car in cars %}
+        <div class="inventory-card" style="background: #fff; border-radius: 12px; overflow: hidden; 
+                                          box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s;">
+            <!-- Car Image -->
+            {% if car.image %}
+            <img src="{{ car.image.url }}" alt="{{ car.name }}" style="width:100%; height:180px; object-fit: cover;">
+            {% else %}
+            <img src="{% static 'default_car.jpg' %}" alt="No Image" style="width:100%; height:180px; object-fit: cover;">
+            {% endif %}
+
+            <div style="padding: 15px;">
+                <!-- Car Info -->
+                <h3 style="color:#0077b6;">{{ car.name }}</h3>
+                <p><strong>Price:</strong> ₹{{ car.price }}</p>
+                <p><strong>Model:</strong> {{ car.model }}</p>
+                <p><strong>Status:</strong> {{ car.status }}</p>
+
+                <!-- Buttons -->
+                <a href="{% url 'car_detail' car.id %}" 
+                   style="display:inline-block; margin-top:10px; color:#fff; background:#0077b6; padding:8px 12px; border-radius:5px; text-decoration:none;">
+                   View Details
+                </a>
+                <a href="{% url 'buy_now' car.id %}" 
+                   style="display:inline-block; margin-top:10px; margin-left:5px; color:#fff; background:#0096c7; padding:8px 12px; border-radius:5px; text-decoration:none;">
+                   Buy Now
+                </a>
+
+                <!-- Purchased Info -->
+                {% if car.sales.exists %}
+                <div style="margin-top: 15px; padding: 10px; background: #f1f1f1; border-radius: 8px;">
+                    <strong>Purchased By:</strong>
+                    <ul style="text-align: left; margin: 5px 0; padding-left: 20px;">
+                        {% for sale in car.sales.all %}
+                        <li>{{ sale.customer.name }} on {{ sale.sale_date }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div style="text-align: center; grid-column: 1 / -1;">
+            <p>No cars available in inventory.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .inventory-card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}

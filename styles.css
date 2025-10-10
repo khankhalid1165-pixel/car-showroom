@@ -1,0 +1,58 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('{% static "https://d3jvxfsgjxj1vz.cloudfront.net/news/wp-content/uploads/2017/07/image01-61.jpg" %}') no-repeat center center fixed; 
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    background-color: rgba(104, 170, 237, 0.8); 
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand a {
+    color: #e65208;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-links li {
+    display: inline;
+}
+
+.navbar-links a {
+    color: #023532;
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+}
+
+.navbar-links a:hover {
+    background-color: #e36490;
+    border-radius: 4px;
+}
+
+.content {
+    padding: 20px;
+    flex: 1;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: rgba(110, 231, 237, 0.9); 
+    width: 100%;
+}

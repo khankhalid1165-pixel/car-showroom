@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Car Details{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 20px;">
+    <h1 style="color: #0077b6;">{{ car.name }} Details</h1>
+    
+    <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+            {% if car.image %}
+                <img src="{{ car.image.url }}" alt="{{ car.name }}" style="width:100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+            {% else %}
+                <div style="width:100%; height:200px; background:#ddd; border-radius:10px; display:flex; align-items:center; justify-content:center;">
+                    <span>No Image Available</span>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div style="flex: 1; min-width: 300px;">
+            <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h3 style="color: #0077b6; margin-top: 0;">Car Information</h3>
+                <p><strong>Name:</strong> {{ car.name }}</p>
+                <p><strong>Model:</strong> {{ car.model }}</p>
+                <p><strong>Register Year:</strong> {{ car.register_year }}</p>
+                <p><strong>KM Run:</strong> {{ car.km_run }}</p>
+                <p><strong>Average:</strong> {{ car.average }}</p>
+                <p><strong>Fuel Type:</strong> {{ car.fuel_type }}</p>
+                <p><strong>Price:</strong> ₹{{ car.price|floatformat:2 }}</p>
+                <p><strong>Status:</strong> {{ car.status }}</p>
+                
+                <div style="margin-top: 20px;">
+                    <a href="{% url 'buy_now' car.id %}" class="btn btn-success">Buy Now</a>
+                    <a href="{% url 'inventory' %}" class="btn" style="margin-left: 10px;">Back to Inventory</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
